@@ -1,4 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { UpdateProductoDto } from './dto';
+import { CreateProductoDto } from './dto/create-producto.dto';
 import { Producto } from './producto.entity';
 
 @Injectable()
@@ -24,14 +26,14 @@ export class ProductosService {
         return producto;
     }
 
-    createProducto(message: string) {
+    createProducto({message}: CreateProductoDto) {
         this.productos.push({
             id: (Math.floor(Math.random() * 2000) + 1 ).toString(),
             message,
         });
     }
 
-    updateProducto(id: string, message: any) {
+    updateProducto(id: string, {message}: UpdateProductoDto) {
         const producto: Producto = this.getProducto(id);
         producto.message = message;
 
