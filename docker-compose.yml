@@ -35,10 +35,20 @@ services:
       image: mongo-express
       container_name: mongo_express
       ports:
-        - 8081:8081
+        - 3003:8081
       environment: 
         - ME_CONFIG_MONGODB_ADMINUSERNAME=root
         - ME_CONFIG_MONGODB_ADMINPASSWORD=root
         - ME_CONFIG_MONGODB_SERVER=mongo1
 
+  mongood:
+    container_name: mongo1-client
+    links:
+     - mongodb
+    image: renzholy/mongood:latest    
+    # environment:
+     # - MONGO_URI=mongodb://root:root@mongodb/thedbname?authSource=admin
+      
+    ports:
+      - "3001:3000"
 
